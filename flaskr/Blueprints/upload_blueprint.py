@@ -1,32 +1,24 @@
-from flask import render_template, request, Blueprint, redirect, url_for, abort, current_app
-
+from flask import render_template, request, Blueprint, redirect, url_for, abort
+from ..shared.utils import analyze_image
 from ..models import Image, add_image
-import os
-from ..detector import detect
 
 upload_blueprint = Blueprint('upload_blueprint', __name__, template_folder='templates')
 
-@upload_blueprint.route('/')
-def index():
-    return render_template('index.html')
+@upload_blueprint.route('/upload')
+def upload():
+    return render_template('upload.html')
 
 
 @upload_blueprint.route('/api/uploadImages', methods=['POST'])
-def upload_files():
+def api_upload():
     file = request.files['file']
-
-    # Check filename extension to be valid
     filename = file.filename
-    if filename != '':
-        file_ext = os.path.splitext(filename)[1]
-        if file_ext not in current_app.config['EXTENSIONS']:
-            abort(400)
 
-    # Analyze image
-    file.save(os.path.join(current_app.config['UPLOAD_PATH'], filename))
-    objects = detect(os.path.join(current_app.config['UPLOAD_PATH'], filename))
-
-    add_image(filename, objects[0], objects[1])
+    tags = analyze_image(file)
+    if not tags:
+        abort(400)
+    else:
+        add_image(filename, tags[0], tags[1])
 
     print("Saved {} to the database!".format(filename))
-    return redirect(url_for('upload_blueprint.index'))
+    return redirect(url_for('upload_blueprint.upload'))
