@@ -1,12 +1,15 @@
 <html>
-    <head>
-        <title>View Image</title>
-    </head>
-    <body>
-        {% if image is none %}
-            <div class="col-8 offset-2 text-center">No images found that match your search</div>
-        {% else %}
-            <img src="{{url_for('static',filename='input/')}}{{image.file_name}}">
-        {% endif %}
-    </body>
+
+<head>
+    <title>View Image</title>
+</head>
+
+<body>
+    {% if image is none %}
+    <div class="col-8 offset-2 text-center">No images found that match your search</div>
+    {% else %}
+    <img src="{{url_for('static',filename='input/')}}{{image.file_name}}">
+    {% endif %}
+</body>
+
 </html>
