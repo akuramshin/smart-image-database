@@ -23,7 +23,7 @@ def test_upload_image(test_client, init_database):
     THEN check that we recieve a valid response and the database is updated
     """
     files = dict(file=open('tests/functional/dog2.jpg', 'rb'))
-    response = test_client.post('/api/uploadImages',data=files,follow_redirects=True)
+    response = test_client.post('/api/uploadImages', data=files, follow_redirects=True)
 
     assert response.status_code == 200
     assert Image.query.filter(Image.file_name =='dog2.jpg').first() is not None

@@ -20,7 +20,7 @@ def test_client():
 def init_database(test_client):
     db.create_all()
 
-    image1 = Image('dog.jpg', 'dog', 'cat')
+    image1 = Image('dog.jpg', 'dog', 'car')
     image2 = Image('cat.jpg', 'cat', 'None')
     db.session.add(image1)
     db.session.add(image2)
