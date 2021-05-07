@@ -5,14 +5,16 @@ from imageai.Classification import ImageClassification
 
 class Detector:
 
-    def __init__(self, model_path):
+    def __init__(self, model_path, speed):
         self.detector = ObjectDetection()
 
         self.detector.setModelTypeAsTinyYOLOv3()
         self.detector.setModelPath(model_path)
-        self.detector.loadModel(detection_speed="fastest")
+        self.detector.loadModel(detection_speed=speed)
 
 
+    # Run object detection and return the two tags with highest probability.
+    # In the case of no objects detected, tag="None"
     def detect(self, input_path):
         _, detection = self.detector.detectObjectsFromImage(input_image=input_path, output_type="array", minimum_percentage_probability=30)
 

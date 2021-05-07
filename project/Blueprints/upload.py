@@ -11,6 +11,10 @@ def upload():
     return render_template('upload.html')
 
 
+# Given a POSTed image:
+# 1. Check if the file is safe
+# 2. Save the image in the file system
+# 3. Add an entry into the database with the filename and tags
 @upload_blueprint.route('/api/uploadImages', methods=['POST'])
 def api_upload():
     file = request.files['file']
@@ -22,5 +26,4 @@ def api_upload():
     else:
         add_image(filename, tags[0], tags[1])
 
-    print("Saved {} to the database!".format(filename))
     return redirect(url_for('upload_blueprint.upload'))

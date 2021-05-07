@@ -4,9 +4,12 @@ import os
 from project import dt
 import ntpath
 
+# Extract the filename in the case that the uploaded filename is in file path form (e.g. '/a/b/c/dog.jpg)
 def get_filename(file):
     return ntpath.basename(file.filename)
 
+
+# Given search tags, query our database to see if any images match
 def tag_search(primary, secondary=None):
     images = None
     if primary == "all":
@@ -22,16 +25,17 @@ def tag_search(primary, secondary=None):
     
     return images
 
+
 def analyze_image(file):
     filename = get_filename(file)
 
     # Check filename extension to be valid
     if filename != '':
-        file_ext = os.path.splitext(filename)[1]
-        if file_ext not in current_app.config['EXTENSIONS']:
+        extension = os.path.splitext(filename)[1]
+        if extension not in current_app.config['EXTENSIONS']:
             return False
 
-    # Analyze image
+    # Save the image to the file system and run object detection
     file.save(os.path.join(current_app.config['UPLOAD_PATH'], filename))
     objects = dt.detect(os.path.join(current_app.config['UPLOAD_PATH'], filename))
 

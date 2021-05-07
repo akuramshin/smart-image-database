@@ -2,6 +2,10 @@ import pytest
 from project import create_app, db
 from project.models import Image
 
+"""
+This file contains the fixtures that define some initial testing state.
+"""
+
 
 @pytest.fixture(scope='module')
 def new_image():

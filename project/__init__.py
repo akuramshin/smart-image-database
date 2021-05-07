@@ -5,7 +5,7 @@ from .shared.detector import Detector
 
 
 db = SQLAlchemy()
-dt = Detector("project/models/yolo-tiny.h5")
+dt = Detector(model_path="project/models/yolo-tiny.h5", speed="fastest")
 
 
 # Application factory

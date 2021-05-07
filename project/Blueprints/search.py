@@ -9,18 +9,21 @@ search_blueprint = Blueprint('search_blueprint', __name__, template_folder='temp
 def search():
     return render_template('search.html')
 
+
+# Check if the POSTed text query matches any of the images in our database
 @search_blueprint.route('/api/search-text', methods=['POST'])
 def api_search_text():
-    if request.method == 'POST':
-        search = request.form['search'].lower()
+    search = request.form['search'].lower()
 
-        images = tag_search(search)
-        
-        if images:
-            return render_template('search.html', results=images)
-        else:
-            return redirect(url_for('search_blueprint.search'))
+    images = tag_search(search)
+    
+    if images:
+        return render_template('search.html', results=images)
+    else:
+        return redirect(url_for('search_blueprint.search'))
 
+
+# Detect the tags of the query image and check if they match any of the images in our database
 @search_blueprint.route('/api/search-image', methods=['POST'])
 def api_search_image():
     file = request.files['file']
@@ -34,6 +37,8 @@ def api_search_image():
     else:
         return redirect(url_for('search_blueprint.search'))
 
+
+# Given the unique id of the image in our database, display that image with full resolution
 @search_blueprint.route('/view/<image_id>')
 def view_image(image_id):
     image = Image.query.filter(Image.id == image_id).first()
