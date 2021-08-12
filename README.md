@@ -1,4 +1,4 @@
-# Shopify Developer Challenge
+# Smart Image Database
 
 ## Get started
 In order to run the API locally, you need the Python 3.x.x with the following dependencies installed:
@@ -26,7 +26,7 @@ I was interested in implementing image search myself so I developed it from scra
 
 ## Usage
 
-While in the main directory (`shopify-backend-challenge`), run the command `flask run` to start the flask application. It might take a bit for the application to start as it is creating the database and loading in the object detection model (ignore the warnings if you don't have a GPU set up on your machine).
+While in the main directory (`smart-image-search`), run the command `flask run` to start the flask application. It might take a bit for the application to start as it is creating the database and loading in the object detection model (ignore the warnings if you don't have a GPU set up on your machine).
 
 Once the application is running, you can head over to the webpage [http://127.0.0.1:5000/](http://127.0.0.1:5000/).
 
@@ -45,7 +45,7 @@ I decided to use the `pytest` tool for testing. Pytest's fixtures make it easier
 
 I have split my tests into the unit and functional categories. Each test is accompanied by a description following the Given-When-Then style.
 
-While in the main directory (`shopify-backend-challenge`), enter the command `python -m pytest` to run the tests.
+While in the main directory (`smart-image-search`), enter the command `python -m pytest` to run the tests.
 
 
 ## Security 
