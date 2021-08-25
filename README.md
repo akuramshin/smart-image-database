@@ -1,5 +1,5 @@
 # Smart Image Database
-Image database that automaticaly labels uploaded images using a machine learning model for keywork image search.
+Image database that automatically labels uploaded images using a machine learning model for keyword image search.
 
 ## Get started
 In order to run the API locally, you need the Python 3.x.x with the following dependencies installed:
